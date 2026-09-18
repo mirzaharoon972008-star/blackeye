@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Untold Story - PNG Banner Generator</title>
+    <!-- html2canvas library for instant PNG conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        body {
+            background-color: #08090a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .controls {
+            margin-bottom: 25px;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+            color: #0d0f12;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Banner Container */
+        .banner-card {
+            position: relative;
+            width: 850px;
+            background: linear-gradient(135deg, #12161f 0%, #080a0e 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 45px 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            color: #f0f6fc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .content-side {
+            flex: 1;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #8b949e;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #c9d1d9;
+            margin-bottom: 20px;
+            font-weight: 300;
+            border-left: 3px solid #d4af37;
+            padding-left: 15px;
+        }
+
+        .url-text {
+            font-family: monospace;
+            font-size: 1rem;
+            color: #d4af37;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* QR Code Styling */
+        .qr-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-box {
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .qr-box img {
+            width: 140px;
+            height: 140px;
+            display: block;
+        }
+
+        .qr-label {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #8b949e;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <button class="btn-download" id="downloadBtn">⚡ Download as PNG</button>
+    </div>
+
+    <!-- Banner Element to Capture -->
+    <div class="banner-card" id="banner">
+        <div class="content-side">
+            <div class="tagline">An Autobiographical Novel</div>
+            <h1 class="title">The Untold Story of HM</h1>
+            <div class="subtitle">Haroon & Maya — A journey of silent prayers and unbroken faith.</div>
+            
+            <p class="quote">
+                "A moon bright without spots, and a soul born in the quiet shadows. Beyond silence and strict boundaries lies a bond written in the darkest hours before dawn."
+            </p>
+
+            <div class="url-text">untold-story.vercel.app</div>
+        </div>
+
+        <div class="qr-side">
+            <div class="qr-box">
+                <!-- Live QR Code pointing to https://untold-story.vercel.app -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://untold-story.vercel.app&color=0d0f12&bgcolor=ffffff" alt="QR Code" crossorigin="anonymous">
+            </div>
+            <div class="qr-label">Scan to Read</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const banner = document.getElementById('banner');
+            
+            html2canvas(banner, {
+                useCORS: true,
+                scale: 3, // High-DPI render
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'untold-story-banner.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+
+</body>
+</html>
